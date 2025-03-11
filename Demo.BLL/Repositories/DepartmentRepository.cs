@@ -19,11 +19,25 @@ namespace Demo.BLL.Repositories
 
         //[FromServices]
         //public AppDbContext _context {  get; set; } 
-        public List<Department> GetAll()
+        public List<Department> GetAll() => _context.departments.ToList();
+        public Department? GetById(int id) => _context.departments.Find(id);
+
+        public void Delete(Department department)
         {
-            using var context = new AppDbContext();
-            var departments = _context.departments.ToList();
-            return departments;
+            _context.departments.Remove(department);
+            _context.SaveChanges();
+        }
+
+        public void Add(Department department)
+        {
+            _context.departments.Add(department);
+            _context.SaveChanges();
+        }
+
+        public void Update(Department department)
+        {
+            _context.departments.Update(department);
+            _context.SaveChanges();
         }
     }
 }
