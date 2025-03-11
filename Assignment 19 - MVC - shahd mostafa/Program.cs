@@ -1,4 +1,5 @@
 using Demo.DAL.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment_19___MVC___shahd_mostafa
 {
@@ -10,7 +11,11 @@ namespace Assignment_19___MVC___shahd_mostafa
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<AppDbContext>();
+            //builder.Services.AddScoped<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 

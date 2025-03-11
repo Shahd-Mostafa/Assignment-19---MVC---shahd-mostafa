@@ -18,10 +18,10 @@ namespace Demo.DAL.Context
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("server=DESKTOP-FIK5SPH\\SQLEXPRESS;database=MVCDatabase;User Id=Shahd_Mostafa;Password=ColdYagami1258;TrustServerCertificate = True");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("server=DESKTOP-FIK5SPH\\SQLEXPRESS;database=MVCDatabase;User Id=Shahd_Mostafa;Password=ColdYagami1258;TrustServerCertificate = True");
+        //}
 
         public DbSet<Department> departments { get; set; }
     }
