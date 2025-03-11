@@ -1,3 +1,5 @@
+using Demo.DAL.Context;
+
 namespace Assignment_19___MVC___shahd_mostafa
 {
     public class Program
@@ -8,6 +10,7 @@ namespace Assignment_19___MVC___shahd_mostafa
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<AppDbContext>();
 
             var app = builder.Build();
 

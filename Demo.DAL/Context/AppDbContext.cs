@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 
 namespace Demo.DAL.Context
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public AppDbContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-FIK5SPH\\SQLEXPRESS;database=MVCDatabase;User Id=Shahd_Mostafa;Password=ColdYagami1258;TrustServerCertificate = True");
