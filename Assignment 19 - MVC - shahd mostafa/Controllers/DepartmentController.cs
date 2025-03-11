@@ -52,5 +52,26 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             _repository.Update(department);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var department = _repository.GetById(id);
+            return View(department);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Department department)
+        {
+            _repository.Delete(department);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var departments = _repository.GetById(id);
+            return View(departments);
+        }
     }
 }
