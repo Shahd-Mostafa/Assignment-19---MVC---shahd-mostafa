@@ -12,10 +12,18 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             _repository = departmentRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var departments = _repository.GetAll();
             return View(departments);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
