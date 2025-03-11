@@ -1,4 +1,5 @@
-﻿using Demo.DAL.Context;
+﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Context;
 using Demo.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Demo.BLL.Repositories
 {
-    public class DepartmentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         private readonly AppDbContext _context;
 
