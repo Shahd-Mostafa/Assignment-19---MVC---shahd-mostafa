@@ -8,6 +8,11 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
     {
         private readonly IEmployeeRepository _repository;
 
+        private IActionResult controllerHandler(int id, string viewName)
+        {
+            var model = _repository.GetById(id);
+            return View(viewName, model);
+        }
         public EmployeeController(IEmployeeRepository repository)
         {
             _repository = repository;
@@ -34,5 +39,20 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             if(result>0) return RedirectToAction("Index");
             return View(result);
         }
+
+        [HttpPost]
+        public IActionResult Edit([FromRoute] int id,Employee employee)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(employee);
+            }
+            var result = _repository.Update(employee);
+            if (result > 0) return RedirectToAction("Index");
+            return View(result);
+        }
+
+        public IActionResult Edit(int id) =>controllerHandler(id,nameof(Edit));
+
     }
 }
