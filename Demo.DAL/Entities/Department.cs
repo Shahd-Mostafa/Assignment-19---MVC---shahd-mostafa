@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Demo.DAL.Entities
 {
-    public class Department
+    public class Department :BaseEntity
     {
         public int Id { get; set; }
 

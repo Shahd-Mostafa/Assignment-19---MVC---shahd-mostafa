@@ -33,7 +33,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             {
                 return View(department);
             }
-            _repository.Add(department);
+            _repository.Create(department);
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]

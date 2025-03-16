@@ -14,6 +14,9 @@ namespace Assignment_19___MVC___shahd_mostafa
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>();
+            builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+
+            builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             //builder.Services.AddScoped<AppDbContext>();
             builder.Services.AddDbContext<AppDbContext>(options =>
             {

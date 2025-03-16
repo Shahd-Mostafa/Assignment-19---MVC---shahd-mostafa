@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace Demo.BLL.Repositories
 {
-    public class DepartmentRepository :GenericRepository<Department>,IDepartmentRepository
+    public class EmployeeRepository :GenericRepository<Employee>,IEmployeeRepository
     {
         private readonly AppDbContext _context;
-
-        public DepartmentRepository(AppDbContext context):base(context)
+        public EmployeeRepository(AppDbContext context) :base(context)
         {
             _context = context;
+            
         }
 
-
-        //[FromServices]
-        //public AppDbContext _context {  get; set; } 
+        public List<Employee> GetEmployeesBySearchValue(string searchValue)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
