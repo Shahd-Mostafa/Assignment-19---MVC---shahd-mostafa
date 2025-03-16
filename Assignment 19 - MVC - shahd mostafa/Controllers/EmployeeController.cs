@@ -43,6 +43,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         [HttpPost]
         public IActionResult Edit([FromRoute] int id,Employee employee)
         {
+            if(id!=employee.Id) return BadRequest();
             if (!ModelState.IsValid)
             {
                 return View(employee);
@@ -53,6 +54,20 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         public IActionResult Edit(int id) =>controllerHandler(id,nameof(Edit));
+        public IActionResult Delete(int id) => controllerHandler(id, nameof(Delete));
+
+        [HttpPost]
+        public IActionResult Delete([FromRoute] int id, Employee employee)
+        {
+            if (id != employee.Id) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return View(employee);
+            }
+            var result = _repository.Delete(employee);
+            if (result > 0) return RedirectToAction("Index");
+            return View(result);
+        }
 
     }
 }
