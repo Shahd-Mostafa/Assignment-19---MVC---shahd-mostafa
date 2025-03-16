@@ -27,6 +27,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Department department) {
             if (!ModelState.IsValid)
             {
@@ -36,11 +37,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var department= _repository.GetById(id);
-            return View(department);
-        }
+        public IActionResult Edit(int id) =>controllerHandler(id,nameof(Edit));
 
         [HttpPost]
         public IActionResult Edit(Department department)
@@ -54,11 +51,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var department = _repository.GetById(id);
-            return View(department);
-        }
+        public IActionResult Delete(int id) => controllerHandler(id, nameof(Delete));
 
         [HttpPost]
         public IActionResult Delete(Department department)
@@ -68,10 +61,12 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(int id) => controllerHandler(id, nameof(Details));
+
+        private IActionResult controllerHandler(int id,string viewName)
         {
-            var departments = _repository.GetById(id);
-            return View(departments);
+            var model= _repository.GetById(id);
+            return View(viewName,model);
         }
     }
 }
