@@ -17,6 +17,8 @@ namespace Demo.DAL.Entities
         public string Address { get; set; }
 
         public bool isActive { get; set; }
+        public Department? Department { get; set; }
+        public int? DepartmentId { get; set; }
 
     }
 }
