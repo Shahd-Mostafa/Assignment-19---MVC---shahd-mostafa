@@ -1,0 +1,38 @@
+﻿@using Demo.DAL.Entities
+@model Employee
+
+<div class="form-group">
+    <label asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+    <span class="text-danger " asp-validation-for="Name"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Address"></label>
+    <input class="form-control" asp-for="Address" />
+    <span class="text-danger " asp-validation-for="Address"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Age"></label>
+    <input class="form-control" asp-for="Age" />
+    <span class="text-danger " asp-validation-for="Age"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Salary"></label>
+    <input class="form-control" asp-for="Salary" />
+    <span class="text-danger " asp-validation-for="Salary"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Email"></label>
+    <input class="form-control" asp-for="Email" />
+    <span class="text-danger " asp-validation-for="Email"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Phone"></label>
+    <input class="form-control" asp-for="Phone" />
+    <span class="text-danger " asp-validation-for="Phone"></span>
+</div>
+<div class="form-group">
+    <label asp-for="isActive"></label>
+    <input asp-for="isActive" />
+    <span class="text-danger " asp-validation-for="isActive"></span>
+</div>
