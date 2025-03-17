@@ -36,7 +36,11 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employee);
             }
             var result=_repository.Create(employee);
-            if(result>0) return RedirectToAction("Index");
+            if(result>0)
+            {
+                TempData["Message"] = "Employee Created Successfully!";
+                return RedirectToAction("Index");
+            }
             return View(result);
         }
 

@@ -3,7 +3,12 @@
     ViewData["Title"] = "Home";
 }
 
-
+@if(TempData.ContainsKey("Message"))
+{
+    <div>
+        <h1>@TempData["Message"]</h1>
+    </div>
+}
 
 
 <a asp-action="Create" class="btn btn-primary mt-3">Create New Employee</a>
