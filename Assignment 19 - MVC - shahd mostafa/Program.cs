@@ -1,3 +1,4 @@
+using Assignment_19___MVC___shahd_mostafa.services;
 using Demo.BLL.Interfaces;
 using Demo.BLL.Repositories;
 using Demo.DAL.Context;
@@ -23,6 +24,12 @@ namespace Assignment_19___MVC___shahd_mostafa
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            #region DInjection
+            builder.Services.AddSingleton<ISingletonService, SingletonService>();
+            builder.Services.AddScoped<IScopedService, ScopedService>();
+            builder.Services.AddTransient<ITransientService, TransientService>();
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
