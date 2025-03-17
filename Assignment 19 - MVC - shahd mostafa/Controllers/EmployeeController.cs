@@ -55,6 +55,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
 
         public IActionResult Edit(int id) =>controllerHandler(id,nameof(Edit));
         public IActionResult Delete(int id) => controllerHandler(id, nameof(Delete));
+        public IActionResult Details(int id) => controllerHandler(id, nameof(Details));
 
         [HttpPost]
         public IActionResult Delete([FromRoute] int id, Employee employee)
