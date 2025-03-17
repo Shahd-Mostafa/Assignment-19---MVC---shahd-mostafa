@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Demo.DAL.Entities;
 
-namespace Demo.DAL.Entities
+namespace Assignment_19___MVC___shahd_mostafa.Models
 {
-    public class Employee : BaseEntity
+    public class EmployeeViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,8 +13,7 @@ namespace Demo.DAL.Entities
         public string Address { get; set; }
 
         public bool isActive { get; set; }
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
         public int? DepartmentId { get; set; }
-
     }
 }

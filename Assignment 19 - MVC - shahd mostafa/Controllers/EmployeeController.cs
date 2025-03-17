@@ -1,4 +1,6 @@
-﻿using Demo.BLL.Interfaces;
+﻿using Assignment_19___MVC___shahd_mostafa.Models;
+using AutoMapper;
+using Demo.BLL.Interfaces;
 using Demo.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,21 +11,39 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
     {
         private readonly IEmployeeRepository _repository;
         private readonly IDepartmentRepository _department;
+        private readonly IMapper _mapper;
 
         private IActionResult controllerHandler(int id, string viewName)
         {
             var model = _repository.GetById(id);
-            return View(viewName, model);
+            var employee = _mapper.Map<EmployeeViewModels>(model);
+            return View(viewName, employee);
         }
-        public EmployeeController(IEmployeeRepository repository,IDepartmentRepository department)
+        public EmployeeController(IEmployeeRepository repository,IDepartmentRepository department,IMapper mapper)
         {
             _repository = repository;
             _department = department;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
             var Employees = _repository.GetAllWithDepartment();
-            return View(Employees);
+            //var employeesViewModel = Employees.Select(e => new EmployeeViewModels
+            //{
+            //    Address = e.Address,
+            //    Age = e.Age,
+            //    DepartmentId= e.DepartmentId,
+            //    Department=e.Department,
+            //    Name=e.Name,
+            //    Email=e.Email,
+            //    Id=e.Id,
+            //    isActive=e.isActive,
+            //    Phone=e.Phone,
+            //    Salary=e.Salary,
+            //}
+            //);
+            var employeesViewModel = _mapper.Map<List<EmployeeViewModels>>(Employees);
+            return View(employeesViewModel);
         }
 
         public IActionResult Create()
@@ -33,13 +53,14 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeViewModels employeeVm)
         {
             if (!ModelState.IsValid)
             {
                 AddDepartmentViewBag();
-                return View(employee);
+                return View(employeeVm);
             }
+            var employee = _mapper.Map<Employee>(employeeVm);
             var result=_repository.Create(employee);
             if(result>0)
             {
@@ -50,17 +71,18 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id,Employee employee)
+        public IActionResult Edit([FromRoute] int id,EmployeeViewModels employeeVm)
         {
-            if(id!=employee.Id) return BadRequest();
+            if(id!= employeeVm.Id) return BadRequest();
             if (!ModelState.IsValid)
             {
                 AddDepartmentViewBag();
-                return View(employee);
+                return View(employeeVm);
             }
+            var employee = _mapper.Map<Employee>(employeeVm);
             var result = _repository.Update(employee);
             if (result > 0) return RedirectToAction("Index");
-            return View(result);
+            return View(employeeVm);
         }
 
         public IActionResult Edit(int id)
@@ -69,20 +91,29 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             return controllerHandler(id, nameof(Edit));
         }
 
-        public IActionResult Delete(int id) => controllerHandler(id, nameof(Delete));
-        public IActionResult Details(int id) => controllerHandler(id, nameof(Details));
+        public IActionResult Delete(int id)
+        {
+            AddDepartmentViewBag();
+            return controllerHandler(id, nameof(Delete));
+        }
+        public IActionResult Details(int id)
+        {
+                AddDepartmentViewBag();
+                return controllerHandler(id, nameof(Details));
+        }
 
         [HttpPost]
-        public IActionResult Delete([FromRoute] int id, Employee employee)
+        public IActionResult Delete([FromRoute] int id, EmployeeViewModels employeeVm)
         {
-            if (id != employee.Id) return BadRequest();
+            if (id != employeeVm.Id) return BadRequest();
             if (!ModelState.IsValid)
             {
-                return View(employee);
+                return View(employeeVm);
             }
+            var employee = _mapper.Map<Employee>(employeeVm);
             var result = _repository.Delete(employee);
             if (result > 0) return RedirectToAction("Index");
-            return View(result);
+            return View(employeeVm);
         }
 
         private void AddDepartmentViewBag()

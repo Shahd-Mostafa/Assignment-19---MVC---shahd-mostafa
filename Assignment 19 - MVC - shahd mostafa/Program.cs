@@ -1,3 +1,4 @@
+using Assignment_19___MVC___shahd_mostafa.Helper.profiles;
 using Assignment_19___MVC___shahd_mostafa.services;
 using Demo.BLL.Interfaces;
 using Demo.BLL.Repositories;
@@ -29,6 +30,11 @@ namespace Assignment_19___MVC___shahd_mostafa
             builder.Services.AddSingleton<ISingletonService, SingletonService>();
             builder.Services.AddScoped<IScopedService, ScopedService>();
             builder.Services.AddTransient<ITransientService, TransientService>();
+            builder.Services.AddAutoMapper(opt=>
+            {
+                opt.AddProfile<EmployeeProfile>();
+            }
+            );
             #endregion
             var app = builder.Build();
 
