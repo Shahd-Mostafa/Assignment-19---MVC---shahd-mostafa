@@ -9,6 +9,7 @@ namespace Demo.BLL.Interfaces
 {
     public interface IEmployeeRepository :IGenericRepository<Employee>
     {
+        List<Employee> GetAllWithDepartment();
         List<Employee> GetEmployeesBySearchValue(string searchValue);
 
     }
