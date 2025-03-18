@@ -25,9 +25,14 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             _department = department;
             _mapper = mapper;
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchValue)
         {
-            var Employees = _repository.GetAllWithDepartment();
+            var Employees = new List<Employee>();
+            if(searchValue!=null)
+            {
+                Employees = _repository.GetEmployeesBySearchValue(searchValue);
+            }
+            else Employees = _repository.GetAllWithDepartment();
             //var employeesViewModel = Employees.Select(e => new EmployeeViewModels
             //{
             //    Address = e.Address,

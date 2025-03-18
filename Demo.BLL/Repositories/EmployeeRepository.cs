@@ -17,8 +17,12 @@ namespace Demo.BLL.Repositories
         public List<Employee> GetAllWithDepartment() =>_context.Employees.Include(c=>c.Department).ToList();
 
         public List<Employee> GetEmployeesBySearchValue(string searchValue)
-        {
-            throw new NotImplementedException();
-        }
+=> _context.Employees.Include(c => c.Department).Where(e=>e.Name.ToLower().Trim().Contains(searchValue.ToLower().Trim()) ||
+    e.Address.ToLower().Trim().Contains(searchValue.ToLower().Trim())
+    || e.Email.ToLower().Trim().Contains(searchValue.ToLower().Trim())
+    || e.Phone.ToLower().Trim().Contains(searchValue.ToLower().Trim())
+    ||e.Department.Name.ToLower().Trim().Contains(searchValue.ToLower().Trim())
+
+).ToList();
     }
 }
