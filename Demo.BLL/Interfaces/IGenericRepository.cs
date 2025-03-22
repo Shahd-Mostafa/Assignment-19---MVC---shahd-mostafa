@@ -11,8 +11,8 @@ namespace Demo.BLL.Interfaces
     {
         TEntity GetById(int id);
         List<TEntity> GetAll();
-        int Update(TEntity entity);
-        int Delete(TEntity entity);
-        int Create(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
+        void Create(TEntity entity);
     }
 }

@@ -9,20 +9,18 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly IEmployeeRepository _repository;
-        private readonly IDepartmentRepository _department;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         private IActionResult controllerHandler(int id, string viewName)
         {
-            var model = _repository.GetById(id);
+            var model = _unitOfWork.Employee.GetById(id);
             var employee = _mapper.Map<EmployeeViewModels>(model);
             return View(viewName, employee);
         }
-        public EmployeeController(IEmployeeRepository repository,IDepartmentRepository department,IMapper mapper)
+        public EmployeeController(IUnitOfWork unitOfWork,IMapper mapper)
         {
-            _repository = repository;
-            _department = department;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public IActionResult Index(string searchValue)
@@ -30,9 +28,9 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             var Employees = new List<Employee>();
             if(searchValue!=null)
             {
-                Employees = _repository.GetEmployeesBySearchValue(searchValue);
+                Employees = _unitOfWork.Employee.GetEmployeesBySearchValue(searchValue);
             }
-            else Employees = _repository.GetAllWithDepartment();
+            else Employees = _unitOfWork.Employee.GetAllWithDepartment();
             //var employeesViewModel = Employees.Select(e => new EmployeeViewModels
             //{
             //    Address = e.Address,
@@ -66,8 +64,9 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
-            var result=_repository.Create(employee);
-            if(result>0)
+            _unitOfWork.Employee.Create(employee);
+            var result = _unitOfWork.SaveChanges();
+            if (result>0)
             {
                 TempData["Message"] = "Employee Created Successfully!";
                 return RedirectToAction("Index");
@@ -85,7 +84,8 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
-            var result = _repository.Update(employee);
+            _unitOfWork.Employee.Update(employee);
+            var result = _unitOfWork.SaveChanges();
             if (result > 0) return RedirectToAction("Index");
             return View(employeeVm);
         }
@@ -116,14 +116,15 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
-            var result = _repository.Delete(employee);
+            _unitOfWork.Employee.Delete(employee);
+            var result = _unitOfWork.SaveChanges();
             if (result > 0) return RedirectToAction("Index");
             return View(employeeVm);
         }
 
         private void AddDepartmentViewBag()
         {
-            var department = _department.GetAll();
+            var department = _unitOfWork.Department.GetAll();
             SelectList listItems = new SelectList(department, nameof(Department.Id), nameof(Department.Name));
             ViewBag.Departments = listItems;
         }

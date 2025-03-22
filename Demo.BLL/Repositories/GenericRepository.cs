@@ -17,26 +17,23 @@ namespace Demo.BLL.Repositories
             _context=context;
         }
 
-        public int Create(TEntity entity)
+        public void Create(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
-            return _context.SaveChanges();
         }
 
-        public int Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            return _context.SaveChanges();
         }
 
         public List<TEntity> GetAll() => _context.Set<TEntity>().ToList();
 
         public TEntity GetById(int id) => _context.Set<TEntity>().Find(id) !;
 
-        public int Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
-            return _context.SaveChanges();
         }
     }
 }
