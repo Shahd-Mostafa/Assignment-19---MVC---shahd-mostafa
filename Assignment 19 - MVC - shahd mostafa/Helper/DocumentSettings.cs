@@ -11,13 +11,13 @@
             formFile.CopyTo(stream);
             return fileName;
         }
-        public static void DeleteFile(string formFile, string folderName)
+        public static void DeleteFile(string fileName, string folderName)
         {
             string folderPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Files", folderName);
-            string fileName = $"{Guid.NewGuid()}-{formFile}";
-            if (File.Exists(folderPath))
+            string filePath = Path.Combine(folderPath, fileName);
+            if (File.Exists(filePath))
             {
-                File.Delete(folderPath);
+                File.Delete(filePath);
             }
         }
 
