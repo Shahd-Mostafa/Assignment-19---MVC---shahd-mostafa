@@ -1,5 +1,7 @@
 ﻿@using Demo.DAL.Entities
 @model EmployeeViewModels
+<img  src="~/Files/Images/@Model.ImageName" class="w-100 h-100 rounded"/>
+<input hidden asp-for="ImageName"/>
 <div class="form-group">
     <label asp-for="Name"></label>
     <input readonly class="form-control" asp-for="Name" />

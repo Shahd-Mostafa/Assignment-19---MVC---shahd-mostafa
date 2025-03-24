@@ -1,4 +1,5 @@
-﻿using Assignment_19___MVC___shahd_mostafa.Models;
+﻿using Assignment_19___MVC___shahd_mostafa.Helper;
+using Assignment_19___MVC___shahd_mostafa.Models;
 using AutoMapper;
 using Demo.BLL.Interfaces;
 using Demo.DAL.Entities;
@@ -64,6 +65,10 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
+            if (employee != null && employeeVm.Image.Length > 0)
+            {
+                employee.ImageName = DocumentSettings.UploadFile(employeeVm.Image, "Images");
+            }
             _unitOfWork.Employee.Create(employee);
             var result = _unitOfWork.SaveChanges();
             if (result>0)
@@ -84,6 +89,14 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
+            if(employee !=null && employeeVm.Image.Length >0)
+            {
+                if(employee.ImageName!=null)
+                {
+                    DocumentSettings.DeleteFile(employeeVm.Image,"Images");
+                }
+                employee.ImageName = employeeVm.Image.UploadFile("Images");
+            }
             _unitOfWork.Employee.Update(employee);
             var result = _unitOfWork.SaveChanges();
             if (result > 0) return RedirectToAction("Index");
@@ -116,6 +129,10 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
+            if (employee.ImageName != null)
+            {
+                DocumentSettings.DeleteFile(employeeVm.Image, "Images");
+            }
             _unitOfWork.Employee.Delete(employee);
             var result = _unitOfWork.SaveChanges();
             if (result > 0) return RedirectToAction("Index");
