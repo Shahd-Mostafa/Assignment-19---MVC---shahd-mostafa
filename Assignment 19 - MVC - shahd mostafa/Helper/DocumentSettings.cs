@@ -11,10 +11,10 @@
             formFile.CopyTo(stream);
             return fileName;
         }
-        public static void DeleteFile(IFormFile formFile, string folderName)
+        public static void DeleteFile(string formFile, string folderName)
         {
             string folderPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Files", folderName);
-            string fileName = $"{Guid.NewGuid()}-{formFile.FileName}";
+            string fileName = $"{Guid.NewGuid()}-{formFile}";
             if (File.Exists(folderPath))
             {
                 File.Delete(folderPath);

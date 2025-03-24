@@ -65,7 +65,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
-            if (employee != null && employeeVm.Image.Length > 0)
+            if (employeeVm.Image != null && employeeVm.Image.Length > 0)
             {
                 employee.ImageName = DocumentSettings.UploadFile(employeeVm.Image, "Images");
             }
@@ -89,13 +89,10 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
                 return View(employeeVm);
             }
             var employee = _mapper.Map<Employee>(employeeVm);
-            if(employee !=null && employeeVm.Image.Length >0)
+            if(employeeVm.Image !=null && employeeVm.Image.Length >0)
             {
-                if(employee.ImageName!=null)
-                {
-                    DocumentSettings.DeleteFile(employeeVm.Image,"Images");
-                }
-                employee.ImageName = employeeVm.Image.UploadFile("Images");
+                if(employee.ImageName!=null) DocumentSettings.DeleteFile(employee.ImageName,"Images");
+                employee.ImageName = DocumentSettings.UploadFile(employeeVm.Image,"Images");
             }
             _unitOfWork.Employee.Update(employee);
             var result = _unitOfWork.SaveChanges();
@@ -131,7 +128,7 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             var employee = _mapper.Map<Employee>(employeeVm);
             if (employee.ImageName != null)
             {
-                DocumentSettings.DeleteFile(employeeVm.Image, "Images");
+                DocumentSettings.DeleteFile(employee.ImageName, "Images");
             }
             _unitOfWork.Employee.Delete(employee);
             var result = _unitOfWork.SaveChanges();
