@@ -1,0 +1,39 @@
+﻿@using Demo.DAL.Entities
+@model EmployeeViewModels
+<img  src="~/Files/Images/@Model.ImageName" class="w-100 h-100 rounded"/>
+<input hidden asp-for="ImageName"/>
+<div class="form-group">
+    <label asp-for="Name"></label>
+    <input readonly class="form-control" asp-for="Name" />
+</div>
+<div class="form-group">
+    <label asp-for="Address"></label>
+    <input readonly class="form-control" asp-for="Address" />
+</div>
+<div class="form-group">
+    <label asp-for="Age"></label>
+    <input readonly class="form-control" asp-for="Age" />
+</div>
+<div class="form-group">
+    <label asp-for="Salary"></label>
+    <input readonly class="form-control" asp-for="Salary" />
+</div>
+<div class="form-group">
+    <label asp-for="Email"></label>
+    <input readonly class="form-control" asp-for="Email" />
+</div>
+<div class="form-group">
+    <label asp-for="Phone"></label>
+    <input readonly class="form-control" asp-for="Phone" />
+</div>
+<div class="form-group">
+    <label asp-for="Department"></label>
+    <select disabled class="form-control" asp-items="@ViewBag.Departments" asp-for="DepartmentId">
+    </select>
+    @*     <input class="form-control" asp-for="Phone" />
+    <span class="text-danger " asp-validation-for="Phone"></span> *@
+</div>
+<div class="form-group">
+    <label asp-for="isActive"></label>
+    <input readonly asp-for="isActive" />
+</div>
