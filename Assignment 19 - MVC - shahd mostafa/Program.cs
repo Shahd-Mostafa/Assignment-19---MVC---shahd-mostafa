@@ -3,6 +3,8 @@ using Assignment_19___MVC___shahd_mostafa.services;
 using Demo.BLL.Interfaces;
 using Demo.BLL.Repositories;
 using Demo.DAL.Context;
+using Demo.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment_19___MVC___shahd_mostafa
@@ -36,6 +38,9 @@ namespace Assignment_19___MVC___shahd_mostafa
             }
             );
             #endregion
+            builder.Services.AddIdentity<AppUser,IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

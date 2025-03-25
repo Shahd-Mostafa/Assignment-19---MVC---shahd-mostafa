@@ -1,0 +1,60 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/AuthLayout.cshtml";
+}
+
+<h1>Signup Form</h1>
+<div class="main-agileinfo">
+	<div class="agileits-top">
+		<form asp-action="Register" method="post">
+			<div asp-validation-summary="All"></div>
+			<div>
+				<label asp-for="FirstName">First Name</label>
+				<input class="text" asp-for="FirstName" placeholder="First Name">
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="LastName">Last Name</label>
+				<input class="text" asp-for="LastName" placeholder="Last Name">
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="UserName">User Name</label>
+				<input class="text" asp-for="UserName" placeholder="User name">
+				<span asp-validation-for="UserName" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="Email">Email</label>
+				<input class="text email" type="email" asp-for="Email" placeholder="Email">
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="Password">Password</label>
+				<input class="text" asp-for="Password" placeholder="Password">
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="ConfirmPassword">Confirm Password</label>
+				<input class="text w3lpass" asp-for="ConfirmPassword" placeholder="Confirm Password">
+				<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+			</div>
+			<div class="wthree-text">
+				<label class="anim">
+					<input type="checkbox" class="checkbox" asp-for="IsAgree">
+					<span>I Agree To The Terms & Conditions</span>
+				</label>
+				<div class="clear"> </div>
+			</div>
+			<input type="submit" value="SIGNUP">
+		</form>
+		<p>Don't have an Account? <a asp-action="Login"> Login Now!</a></p>
+	</div>
+</div>
+
+@section Scripts
+{
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
