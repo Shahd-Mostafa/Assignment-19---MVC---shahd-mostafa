@@ -54,13 +54,13 @@ namespace Assignment_19___MVC___shahd_mostafa.Controllers
             return builder.ToString();
         }
 
-        public int sum(int x,int y)
-        {
-            return x + y;
-        }
-        public async Task<int> sumAsync(int x ,int y)
-        {
-            return await Task.Run(() => x + y);
-        }
+        //public int sum(int x,int y)
+        //{
+        //    return x + y;
+        //}
+        //public async Task<int> sumAsync(int x ,int y)
+        //{
+        //    return await Task.Run(() => x + y);
+        //}
     }
 }

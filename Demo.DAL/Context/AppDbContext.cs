@@ -1,4 +1,6 @@
 ﻿using Demo.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Demo.DAL.Context
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser,IdentityRole,string>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -16,6 +18,12 @@ namespace Demo.DAL.Context
 
         public AppDbContext()
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            //builder.Entity<IdentityRole>().ToTable("Roles");
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
