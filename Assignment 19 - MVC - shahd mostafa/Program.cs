@@ -41,6 +41,7 @@ namespace Assignment_19___MVC___shahd_mostafa
             builder.Services.AddIdentity<AppUser,IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -56,6 +57,7 @@ namespace Assignment_19___MVC___shahd_mostafa
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

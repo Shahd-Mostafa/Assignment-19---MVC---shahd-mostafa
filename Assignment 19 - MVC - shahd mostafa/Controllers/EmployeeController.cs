@@ -3,11 +3,13 @@ using Assignment_19___MVC___shahd_mostafa.Models;
 using AutoMapper;
 using Demo.BLL.Interfaces;
 using Demo.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Assignment_19___MVC___shahd_mostafa.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

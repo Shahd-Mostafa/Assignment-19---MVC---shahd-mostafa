@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Assignment_19___MVC___shahd_mostafa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment_19___MVC___shahd_mostafa.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

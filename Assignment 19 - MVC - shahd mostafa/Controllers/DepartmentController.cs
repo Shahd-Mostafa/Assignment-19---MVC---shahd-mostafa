@@ -1,10 +1,12 @@
 ﻿using Demo.BLL.Interfaces;
 using Demo.BLL.Repositories;
 using Demo.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment_19___MVC___shahd_mostafa.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _repository;
